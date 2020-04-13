@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@if(Session::has('flash_message'))
+    @if(Session::has('flash_message'))
         <div class="alert alert-success">
             {{ session('flash_message') }}
         </div>
@@ -19,7 +19,6 @@
                                 {{ $cartitem->amount }}円
                             </div>
                             <div class="form-inline">
-                                <!-- 数量を更新するフォームに変更 -->
                                 <form method="POST" action="/cartitem/{{ $cartitem->id }}">
                                     @method('PUT')
                                     @csrf
@@ -27,7 +26,6 @@
                                     個
                                     <button type="submit" class="btn btn-primary">更新</button>
                                 </form>
-                                <!-- 削除フォームを追加 -->
                                 <form method="POST" action="/cartitem/{{ $cartitem->id }}">
                                     @method('DELETE')
                                     @csrf
@@ -38,16 +36,25 @@
                     @endforeach
                 </div>
             </div>
+            <!-- この部分を編集 -->
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
                         小計
                     </div>
                     <div class="card-body">
-                        {{ $subtotal }}円
+                        <div>
+                            {{ $subtotal }}円
+                        </div>
+                        <div>
+                            <a class="btn btn-primary" href="/buy" role="button">
+                                レジに進む
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- この部分を編集 -->
         </div>
     </div>
 @endsection
